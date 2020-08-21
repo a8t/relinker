@@ -1,8 +1,9 @@
-// See https://tailwindcss.com/docs/configuration for details
 module.exports = {
-  purge: ["./src/**/*.js"],
+  purge: ["./src/**/*.tsx"],
   theme: {},
-  variants: {},
-  // https://github.com/tailwindcss/custom-forms
-  plugins: [require("@tailwindcss/custom-forms")],
-};
+  variants: {
+    pointerEvents: ["responsive", "hover", "focus", "disabled"],
+    opacity: ["responsive", "hover", "focus", "disabled"],
+  },
+  plugins: [require("@tailwindcss/ui")],
+}

@@ -4,6 +4,8 @@
   "version": "4.0.0",
   "author": "Taylor Bryant <taylor@bryant.io>",
   "dependencies": {
+    "@tailwindcss/ui": "^0.5.0",
+    "classnames": "^2.2.6",
     "gatsby": "2.24.47",
     "gatsby-plugin-manifest": "2.4.22",
     "gatsby-plugin-offline": "3.2.23",
@@ -13,7 +15,10 @@
     "prop-types": "15.7.2",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-helmet": "6.1.0"
+    "react-form": "^4.0.1",
+    "react-helmet": "6.1.0",
+    "react-icons": "^3.11.0",
+    "react-use": "^15.3.3"
   },
   "keywords": [
     "gatsby",
@@ -26,11 +31,9 @@
     "analyze:lint": "eslint --ext .jsx --ext .js .",
     "analyze:prettier": "prettier --list-different \"**/*.{css,js,jsx,json,md}\"",
     "analyze": "npm run analyze:lint && npm run analyze:prettier",
-
     "fix:lint": "eslint --ext .jsx --ext .js . --fix",
     "fix:prettier": "prettier --write \"**/*.{css,js,jsx,json,md}\"",
     "fix": "npm run fix:lint && npm run fix:prettier",
-
     "build": "gatsby build",
     "develop": "gatsby develop",
     "dev": "npm run develop",
