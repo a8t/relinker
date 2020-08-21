@@ -14,7 +14,8 @@ const useRedirectBasedOnQuery = () => {
   const { search } = useLocation();
   const data = new URLSearchParams(search).get("r") ?? "";
 
-  const unencodedObjectString = atob(data) || JSON.stringify({});
+  const unencodedObjectString =
+    Buffer.from(data, "base64").toString() || JSON.stringify({});
 
   const parsedData = JSON.parse(unencodedObjectString);
 
@@ -109,7 +110,9 @@ const Relinker = ({ data, location }) => {
   } = useForm({
     onSubmit: async (values, instance) => {
       const redirectedLink =
-        location.href + "?r=" + btoa(JSON.stringify(values));
+        location.href +
+        "?r=" +
+        Buffer.from(JSON.stringify(values)).toString("base64");
       copyToClipboard(redirectedLink);
     },
   });
