@@ -4,13 +4,15 @@ import _ from "lodash";
 import classNames from "classnames";
 import { useCopyToClipboard } from "react-use";
 import { useForm, useField } from "react-form";
+import { useLocation, redirectTo } from "@reach/router";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import { FaClipboard, FaClipboardCheck } from "react-icons/fa";
 
 const useRedirectBasedOnQuery = () => {
-  const data = new URLSearchParams(location.search).get("r") ?? "";
+  const { search } = useLocation();
+  const data = new URLSearchParams(search).get("r") ?? "";
 
   const unencodedObjectString = atob(data) || JSON.stringify({});
 
@@ -179,10 +181,15 @@ const Relinker = ({ data, location }) => {
                   {values.url && canSubmit ? (
                     <div className="mb-8">
                       <h5>Redirecting link</h5>
-                      <span className="text-xs text-gray-400 ">
+                      <Link
+                        to={
+                          location.href + "?r=" + btoa(JSON.stringify(values))
+                        }
+                        className="text-xs text-gray-400 break-all hover:text-teal-500"
+                      >
                         {location.href + "?r="}
-                        {btoa(values.url)}
-                      </span>
+                        {btoa(JSON.stringify(values))}
+                      </Link>
                     </div>
                   ) : null}
                   <span className="inline-flex rounded-md shadow-sm">
