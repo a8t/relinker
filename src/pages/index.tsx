@@ -28,6 +28,57 @@ const useRedirectBasedOnQuery = () => {
   return parsedData;
 };
 
+const Explanation = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <section className="mt-20 text-gray-700  max-w-xl prose">
+      <h2 className="text-lg font-bold">What's this for?</h2>
+
+      <p className="italic">
+        TL;DR: to get around content filters on Facebook (etc).
+      </p>
+
+      {isOpen ? (
+        <div>
+          <p>
+            Sometimes you want to send someone a link to a webpage, but the site
+            you're posting the link on blocks some content. For example,
+            Facebook has been known to crack down on progressive news outlets,
+            anarchist groups, etc.
+          </p>
+
+          <p>
+            Usually, you can't get around this even with link shorteners like
+            <a href="tinyurl.com"> tinyurl</a>. Those use permanent redirects to
+            the destination page. That's is usually preferable – <i>except</i>{" "}
+            when there's a robo-crawler that follows links, checks content, and
+            decides whether it's allowed.
+          </p>
+
+          <p>
+            So, instead of redirecting a page the way most link shorteners do,
+            this one redirects you <i>after</i> the page loads.
+          </p>
+
+          <p>
+            That means no content previews, no preview image or titles. But it
+            means you can send any link you want.
+          </p>
+
+          <a className="cursor-pointer" onClick={() => setIsOpen(false)}>
+            See less
+          </a>
+        </div>
+      ) : (
+        <a className="cursor-pointer" onClick={() => setIsOpen(true)}>
+          See more
+        </a>
+      )}
+    </section>
+  );
+};
+
 const URLField = () => {
   const {
     meta: { error, isTouched, isValidating },
@@ -119,7 +170,7 @@ const Relinker = ({ data, location }) => {
 
   return (
     <div className="bg-gray-100 min-h-screen flex ">
-      <Layout>
+      <div className="container p-4 sm:p-6 mx-auto mt-12 lg:max-w-3xl">
         <SEO title={title || "Relinker"} />
         <div className="md:grid md:grid-cols-3 md:gap-6 mt-8 margin-auto">
           <div className="md:col-span-1">
@@ -147,7 +198,7 @@ const Relinker = ({ data, location }) => {
                       <URLField />
                     </div>
                   </div>
-                  <div className="grid grid-cols-3 gap-6 mt-4">
+                  {/* <div className="grid grid-cols-3 gap-6 mt-4">
                     <div className="col-span-3 sm:col-span-2">
                       <label
                         htmlFor="company_website"
@@ -157,7 +208,7 @@ const Relinker = ({ data, location }) => {
                       </label>
                       <TitleField />
                     </div>
-                  </div>
+                  </div> */}
                   {/* <div className="mt-6">
                     <label
                       htmlFor="about"
@@ -220,7 +271,9 @@ const Relinker = ({ data, location }) => {
             </Form>
           </div>
         </div>
-      </Layout>
+
+        <Explanation />
+      </div>
     </div>
   );
 };
